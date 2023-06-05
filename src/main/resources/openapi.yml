@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: SegreteriaStudenti
+  description: Demo API realized with OpenAPI
+servers:
+  - url: http://localhost:8080/
+tags:
+  - name: accounts
+    description: Operations between student accounts
+paths:
+  /keepalive:
+    get:
+      tags:
+        - accounts
+      summary: Account Keepalive
+      description: Keepalive route for the account com.exercise.mauro.openapidemo.controller
+      operationId: keepAlive
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+  /:
+    get:
+      tags:
+        - accounts
+      summary: Retrieve accounts
+      description: Get all the account objects
+      operationId: getAccounts
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounts'
+        404:
+          description: No data found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseError'
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        Nome:
+          type: string
+        Cognome:
+          type: string
+        DataDiNascita:
+          type: string
+        CF:
+          type: string
+        Matricola:
+          type: string
+    Accounts:
+      type: array
+      items:
+        $ref: "#/components/schemas/Account"
+    BaseError:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: integer
+          format: int32
