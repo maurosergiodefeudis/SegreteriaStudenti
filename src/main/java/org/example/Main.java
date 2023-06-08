@@ -11,4 +11,10 @@ import org.springframework.context.annotation.Bean;
             System.out.println("App Starting...");
             SpringApplication.run(org.example.Main.class, args);
         }
+
+        @Bean
+        public ObjectMapper getObjMapper(){
+            return new ObjectMapper();
+        }
+
     }
